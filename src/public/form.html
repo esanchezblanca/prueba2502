@@ -1,11 +1,34 @@
 <html>
-    <body>
-        <div>
-            <form action="api/endpoints/checkSum " method="POST">
-                <input placeholder="Primer número" name="param1" />
-                <input placeholder="Segundo número" name="param2" />
-                <button>Sumar</button>
-            </form>
-        </div>
-    </body>
+
+<body>
+    <div>
+        <form action="api/endpoints/checkSum " method="POST">
+            <input placeholder="Primer número" name="param1" />
+            <input placeholder="Segundo número" name="param2" />
+            <button>Sumar</button>
+        </form>
+    </div>
+    <div id="data">Historial de sumas</div>
+
+    <script src="/src/public/callApi.js"></script>
+</body>
+<script>
+    var div = document.createElement("div");
+    let apiUrl = 'http://localhost:80/api/endpoints/getHistories';
+    fetch(apiUrl).then(response => {
+        return response.json();
+    }).then(data => {
+        var mainContainer = document.getElementById("data");
+        for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML = 'Value: ' + data[i].value;
+            mainContainer.appendChild(div);
+        }
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    });
+</script>
+
+
 </html>

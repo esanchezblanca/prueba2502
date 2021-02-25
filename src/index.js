@@ -5,10 +5,8 @@ const PORT = process.env.PORT || 80
 
 const apiRouter = require('./routes/api');
 
-
 const app = express();
 require('./db');
-
 
 app.use(express.static('./public'));
 
